@@ -1,10 +1,42 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App.jsx";
+import { createTheme, ThemeProvider } from "@mui/material";
 
-createRoot(document.getElementById('root')).render(
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#dee9ff",
+    },
+    secondary: {
+      main: "#051212",
+    },
+    terciary: {
+      main: "#BFBFBF",
+    },
+    typography: {
+      fontFamily: "Roboto, sans-serif",
+      h1: {
+        fontSize: "2rem",
+        fontWeight: 600,
+      },
+      h2: {
+        fontSize: "1.5rem",
+        fontWeight: 600,
+      },
+      h3: {
+        fontSize: "1.25rem",
+        fontWeight: 600,
+      },
+    },
+  },
+});
+
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
-  </StrictMode>,
-)
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
+  </StrictMode>
+);
