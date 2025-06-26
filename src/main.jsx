@@ -8,12 +8,12 @@ const theme = createTheme({
   palette: {
     primary: {
       main: "#dee9ff",
+      secondary: "#80f1fb",
+      terciary: "#195b59",
     },
     secondary: {
       main: "#051212",
-    },
-    terciary: {
-      main: "#BFBFBF",
+      secondary: "#BFBFBF",
     },
     typography: {
       fontFamily: "Roboto, sans-serif",

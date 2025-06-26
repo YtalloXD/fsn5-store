@@ -9,7 +9,7 @@ function App() {
     <>
       <Container
         sx={{
-          bgcolor: "#dee9ff",
+          bgcolor: "primary.main",
           // minHeight: "100vh",
           width: "100vh",
         }}
