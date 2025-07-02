@@ -1,57 +1,140 @@
-import { Box, Container } from "@mui/material";
+import {
+  Container,
+  Typography,
+  Card,
+  CardContent,
+  CardMedia,
+  IconButton,
+  Grid,
+  Box,
+} from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useState } from "react";
 import "./GradProducts.css";
 
+const products = [
+  {
+    id: "shirt_Techwear",
+    name: "Shirt Techwear",
+    category: "camisas",
+    stock: 10,
+    image: '/imagens/shirt-techwear_16_58073545-4a93-4e97-8a49-8c0b2a8877a5.webp',
+    price: 59.9,
+  },
+  {
+    id: "black_cargo_pants",
+    name: "Black Cargo Pants",
+    category: "calças",
+    stock: 8,
+    image: '/imagens/Black_Cargo_Pants_Techwear.webp',
+    price: 99.9,
+  },
+  {
+    id: "red_techwear_jacket",
+    name: "Red Techwear Jacket",
+    category: "jaquetas",
+    stock: 8,
+    image: '/imagens/Red_Techwear_Jacket_2.webp',
+    price: 99.9,
+  },
+]
+
 export default function GradProducts() {
-  return (
-    <>
-      <Container
-        sx={{
-          display: "grid",
-          flexDirection: "column",
-          alignItems: "center",
-          textAlign: "center",
-          gap: 2,
-          justifyContent: "center",
-        }}
-      >
-        <ul>
-          <Box sx={{ width: { sx: 1, md: 200 }, height: 320 }}>
-            <li>
-              <img
-                src="src\assets\shirt-techwear_16_58073545-4a93-4e97-8a49-8c0b2a8877a5.webp"
-                alt="SHIRT TECHWEAR"
-                width={220}
-                height={220}
-              />
-              SHIRT TECHWEAR R$240,95
-            </li>
-          </Box>
-          <Box sx={{ width: { sx: 1, md: 200 }, height: 320 }}>
-            <li>
-              <img
-                src="src\assets\Black_Cargo_Pants_Techwear.webp"
-                alt=""
-                width={220}
-                height={220}
-              />
-              BLACK CARGO PANTS TECHWEAR <br />
-              R$300,00
-            </li>
-          </Box>
-          <Box sx={{ width: { sx: 1, md: 200 }, height: 320 }}>
-            <li>
-              <img
-                src="src\assets\Red_Techwear_Jacket_2.webp"
-                alt=""
-                width={250}
-                height={250}
-              />
-              RED TECHWEAR JACKET <br />
-              R$350,00
-            </li>
-          </Box>
-        </ul>
-      </Container>
-    </>
+  const [categoria_selecionada, set_categoria_selecionada] = useState(null);
+  const [menu_aberto, set_menu_aberto] = useState(false);
+
+  let produtos_filtrados;
+
+  if (categoria_selecionada) {
+    produtos_filtrados = products.filter(p => p.category === categoria_selecionada);
+  } else {
+    produtos_filtrados = products;
+  }
+
+  const handle_selecionar_categoria = (categoria) => {
+    if (categoria === "todas") {
+      set_categoria_selecionada(null); 
+    } else {
+      set_categoria_selecionada(categoria);
+    }
+    set_menu_aberto(false);
+  };
+
+   return (
+    <Container className="container_grade">
+      <div style={{position: "relative" }}>
+        <button className="botao" onClick={() => set_menu_aberto(!menu_aberto)}>
+          Selecionar Peças
+        </button>
+
+        {menu_aberto && (
+          <div className="menu">
+            {["todas", "camisas", "calças", "jaquetas"].map((categoria) => (
+              <div className="selecionar" key={categoria} onClick={() => handle_selecionar_categoria(categoria)}>
+                {categoria}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+
+      <Grid container spacing={5}>
+        {produtos_filtrados.map((product) => (
+          <Grid item key={product.id}>
+            <Card className="cards">
+              <CardContent>
+                <Typography className="product_name" variant="h6" gutterBottom>
+                  {product.name.trim()}
+                </Typography>
+
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    mb: 1,
+                    mt: 1,
+                  }}
+                >
+                  <CardMedia
+                    component="img"
+                    image={product.image}
+                    alt={product.name}
+                    sx={{ maxWidth: 150, borderRadius: 1 }}
+                  />
+                </Box>
+
+                <Typography variant="subtitle1" color="secondary">
+                  R$ {product.price.toFixed(2)}
+                </Typography>
+              </CardContent>
+              
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  px: 1,
+                }}
+              >
+                <Typography variant="body2" color="text.secondary">
+                  Estoque: {product.stock}
+                </Typography>
+
+                <Box>
+                  <IconButton aria-label="editar">
+                    <EditIcon className="editar_cor" />
+                  </IconButton>
+                  <IconButton aria-label="deletar">
+                    <DeleteIcon className="deletar_cor" />
+                  </IconButton>
+                </Box>
+              </Box>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
   );
-}
+};

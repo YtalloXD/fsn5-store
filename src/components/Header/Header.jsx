@@ -9,17 +9,13 @@ export default function Header() {
         sx={{
           display: "flex",
           alignItems: "center",
-          gap: 1,
+          gap: 2,
           justifyContent: "center",
-          py: 2,
-          ":hover": {
-            color: "black",
-            bgcolor: "darkgray",
-          },
+          py: 1,
         }}
       >
         FSN5-Store
-        <img src="../src/assets/FSN5-Store.png" height={80} width={80} />
+        <img src="../src/assets/FSN5-Store.png" height={50} width={50} />
       </Typography>
     </header>
   );

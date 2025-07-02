@@ -9,10 +9,11 @@ function App() {
     <>
       <Container
         sx={{
-          bgcolor: "primary.main",
-          // minHeight: "100vh",
-          width: "100vh",
-        }}
+        width: '100vw',
+        height: '100vh',
+        borderRadius: 0,
+        backgroundColor: "white"
+      }}
       >
         <Header />
         <GradProducts />
