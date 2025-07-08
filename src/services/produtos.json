@@ -1,0 +1,122 @@
+[
+  {
+    "Categoria": "Camisas",
+    "Name": "Shirt Techwear",
+    "Price": 59.9,
+    "Estoque": 10,
+    "Disponivel": true,
+    "id": "1"
+  },
+  {
+    "Categoria": "Calças",
+    "Name": "Black Cargo Pants",
+    "Price": 99.9,
+    "Estoque": 8,
+    "Disponivel": true,
+    "id": "2"
+  },
+  {
+    "Categoria": "Jaquetas",
+    "Name": "Red Techwear Jacket",
+    "Price": 99.9,
+    "Estoque": 8,
+    "Disponivel": true,
+    "id": "3"
+  },
+  {
+    "Categoria": "Camisas",
+    "Name": "Shirt basic",
+    "Price": 20.5,
+    "Estoque": 0,
+    "Disponivel": false,
+    "id": "4"
+  },
+  {
+    "Categoria": "Jaquetas",
+    "Name": "Black Techwear Jacket",
+    "Price": 89.9,
+    "Estoque": 20,
+    "Disponivel": true,
+    "id": "5"
+  },
+  {
+    "Categoria": "Sapatos",
+    "Name": "Black High Top Shoes",
+    "Price": 129.9,
+    "Estoque": 5,
+    "Disponivel": true,
+    "id": "6"
+  },
+  {
+    "Categoria": "Calças",
+    "Name": "Basic White Tailored Pants ",
+    "Price": 55.9,
+    "Estoque": 15,
+    "Disponivel": true,
+    "id": "7"
+  },
+  {
+    "Categoria": "Camisas",
+    "Name": "Oversized Streetwear Los Angeles T-Shirt",
+    "Price": 69.9,
+    "Estoque": 0,
+    "Disponivel": false,
+    "id": "8"
+  },
+  {
+    "Categoria": "Calças",
+    "Name": "Baggy Pants Rework",
+    "Price": 55.9,
+    "Estoque": 34,
+    "Disponivel": true,
+    "id": "9"
+  },
+  {
+    "Categoria": "Calças",
+    "Name": "Men's BLACK Jogger Pants",
+    "Price": 109.9,
+    "Estoque": 73,
+    "Disponivel": true,
+    "id": "10"
+  },
+  {
+    "Categoria": "Jaquetas",
+    "Name": "Men's Hip Hop Style Bomber Jacket",
+    "Price": 64.9,
+    "Estoque": 55,
+    "Disponivel": true,
+    "id": "11"
+  },
+  {
+    "Categoria": "Jaquetas",
+    "Name": "Vintage Boxy Jacket",
+    "Price": 99.9,
+    "Estoque": 2,
+    "Disponivel": true,
+    "id": "12"
+  },
+  {
+    "Categoria": "Camisas",
+    "Name": "Men's Basic Oversized T-Shirt",
+    "Price": 64.9,
+    "Estoque": 13,
+    "Disponivel": true,
+    "id": "13"
+  },
+  {
+    "Categoria": "Sapatos",
+    "Name": "Vans Old Skool Sneakers",
+    "Price": 67.9,
+    "Estoque": 22,
+    "Disponivel": true,
+    "id": "14"
+  },
+  {
+    "Categoria": "Sapatos",
+    "Name": "Unisex Chunky Ankle Boots",
+    "Price": 78.9,
+    "Estoque": 0,
+    "Disponivel": false,
+    "id": "15"
+  }
+]
