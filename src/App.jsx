@@ -1,25 +1,26 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Container } from "@mui/material";
-import GradProducts from "./components/GradProducts/GradProducts";
 import Header from "./components/Header/Header";
-import Home from "./pages/Home";
-import "./App.css";
+import GradProducts from "./components/GradProducts/GradProducts";
+import Register from "./pages/Register";
 
-function App() {
+export default function App() {
   return (
-    <>
+    <Router>
+      <Header />
       <Container
         sx={{
           bgcolor: "primary.main",
-          // minHeight: "100vh",
-          width: "100vh",
+          minHeight: "100vh",
+          width: "100%",
+          py: 4,
         }}
       >
-        <Header />
-        <GradProducts />
+        <Routes>
+          <Route path="/" element={<GradProducts />} />
+          <Route path="/cadastrar" element={<Register />} />
+        </Routes>
       </Container>
-      <Home />
-    </>
+    </Router>
   );
 }
-
-export default App;
