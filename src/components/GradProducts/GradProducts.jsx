@@ -23,22 +23,28 @@ export default function GradProducts() {
   const navigate = useNavigate();
 
   // Função para buscar produtos da API
-  const fetchProducts = () => {
-    setLoading(true);
-    fetch('https://6862fe1b88359a373e93ab43.mockapi.io/Produtos')
-      .then((res) => {
-        if (!res.ok) throw new Error("Erro ao carregar produtos");
-        return res.json();
-      })
-      .then((data) => {
-        setProducts(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setErro("Erro ao carregar produtos");
-        setLoading(false);
-      });
-  };
+ useEffect(() => {
+  fetchProducts();
+}, []);
+
+const fetchProducts = () => {
+  setLoading(true);
+  fetch('https://6862fe1b88359a373e93ab43.mockapi.io/Produtos')
+    .then((res) => {
+      if (!res.ok) throw new Error("Erro ao carregar produtos");
+      return res.json();
+    })
+    .then((data) => {
+      console.log("Dados recebidos da API:", data); 
+      setProducts(data);
+      setLoading(false);
+    })
+    .catch((err) => {
+      setErro("Erro ao carregar produtos");
+      setLoading(false);
+    });
+};
+
 
   useEffect(() => {
     fetchProducts();
@@ -116,7 +122,7 @@ export default function GradProducts() {
         )}
       </div>
 
-      <Grid container spacing={3} justifyContent="center" alignContent="stretch">
+      <Grid container spacing={5} justifyContent="center" alignContent="stretch">
         {produtos_filtrados.map((product) => (
           <Grid item key={product.id}>
             <Card className="cards">

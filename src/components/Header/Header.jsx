@@ -12,10 +12,6 @@ export default function Header() {
           gap: 1,
           justifyContent: "center",
           py: 2,
-          ":hover": {
-            color: "black",
-            bgcolor: "darkgray",
-          },
         }}
       >
         FSN5-Store
