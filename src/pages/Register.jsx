@@ -54,19 +54,45 @@ export default function Register() {
     }
   };
 
+  const inputStyles = {
+    backgroundColor: "#222",
+    borderRadius: 1,
+    color: "#fff",
+  };
+
+  const labelStyles = {
+    color: "#fff",
+  };
+
   return (
-    <Container sx={{ mt: 4 }}>
-      <Typography variant="h4" gutterBottom>
+    <Container
+      sx={{ mt: 4, bgcolor: "#000", color: "#fff", borderRadius: 2, p: 3 }}
+    >
+      <Typography variant="h4" gutterBottom textAlign="center" color="#fff">
         Cadastrar Produto
       </Typography>
-      {sucesso && <Alert severity="success">Produto cadastrado com sucesso!</Alert>}
-      {erro && <Alert severity="error">{erro}</Alert>}
-      <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+      {sucesso && (
+        <Alert severity="success" sx={{ mb: 2 }}>
+          Produto cadastrado com sucesso!
+        </Alert>
+      )}
+      {erro && (
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {erro}
+        </Alert>
+      )}
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+      >
         <TextField
           label="Nome do Produto"
           value={nome}
           onChange={(e) => setNome(e.target.value)}
           required
+          InputLabelProps={{ style: labelStyles }}
+          InputProps={{ style: inputStyles }}
         />
         <TextField
           label="Preço"
@@ -74,12 +100,17 @@ export default function Register() {
           value={preco}
           onChange={(e) => setPreco(e.target.value)}
           required
+          InputLabelProps={{ style: labelStyles }}
+          InputProps={{ style: inputStyles }}
+          inputProps={{ min: "0", step: "0.01" }}
         />
         <TextField
           label="Categoria"
           value={categoria}
           onChange={(e) => setCategoria(e.target.value)}
           required
+          InputLabelProps={{ style: labelStyles }}
+          InputProps={{ style: inputStyles }}
         />
         <TextField
           label="Descrição"
@@ -87,21 +118,39 @@ export default function Register() {
           onChange={(e) => setDescricao(e.target.value)}
           required
           multiline
+          InputLabelProps={{ style: labelStyles }}
+          InputProps={{ style: inputStyles }}
+          rows={4}
         />
         <TextField
           label="URL da Imagem (opcional)"
           value={imagem}
           onChange={(e) => setImagem(e.target.value)}
+          InputLabelProps={{ style: labelStyles }}
+          InputProps={{ style: inputStyles }}
         />
         {imagem && (
           <img
             src={imagem}
             alt="Preview"
             width={200}
-            style={{ borderRadius: 8, border: "1px solid #ccc", marginTop: 10 }}
+            style={{
+              borderRadius: 8,
+              border: "1px solid #ccc",
+              marginTop: 10,
+            }}
           />
         )}
-        <Button type="submit" variant="contained" color="primary">
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{
+            backgroundColor: "#fff",
+            color: "#000",
+            fontWeight: "bold",
+            "&:hover": { backgroundColor: "#ddd" },
+          }}
+        >
           Cadastrar
         </Button>
       </Box>
