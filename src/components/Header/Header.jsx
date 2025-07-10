@@ -1,4 +1,5 @@
 import { Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 import "./Header.css";
 
 export default function Header() {
@@ -9,7 +10,7 @@ export default function Header() {
         sx={{
           display: "flex",
           alignItems: "center",
-          gap: 1,
+          gap: 2,
           justifyContent: "center",
           py: 2,
           ":hover": {
@@ -19,7 +20,24 @@ export default function Header() {
         }}
       >
         FSN5-Store
-        <img src="../src/assets/FSN5-Store.png" height={80} width={80} />
+        <img src="../src/assets/FSN5-Store.png" height={80} width={80} alt="Logo FSN5-Store" />
+        
+        <Link to="/cadastrar" style={{ marginLeft: "20px", textDecoration: "none" }}>
+          <button
+            style={{
+              backgroundColor: "#80f1fb",
+              color: "#051212",
+              padding: "10px 20px",
+              border: "none",
+              borderRadius: "8px",
+              cursor: "pointer",
+              fontWeight: "bold",
+              fontSize: "1rem",
+            }}
+          >
+            + Cadastrar Produto
+          </button>
+        </Link>
       </Typography>
     </header>
   );
