@@ -1,0 +1,41 @@
+.register-container {
+  background-color: #000;
+  color: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 600px;
+  margin: 40px auto;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+.register-title {
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.register-preview {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  width: 200px;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .register-container {
+    padding: 16px;
+    margin: 20px;
+  }
+
+  .register-preview {
+    width: 100%;
+  }
+}
