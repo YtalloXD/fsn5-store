@@ -1,0 +1,60 @@
+.container-register {
+    background-color: #ffffff; 
+    color: #fff; 
+    border-radius: 16px;
+    padding: 32px;
+    max-width: 600px;
+    margin: 40px auto;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.titulo {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.alert {
+    margin-bottom: 20px;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.campo {
+    background-color: #ffffff; 
+    border-radius: 8px;
+    color: #000000; 
+}
+
+.campo .MuiInputBase-input {
+    color: #000000; 
+}
+
+.campo .MuiInputLabel-root {
+    color: #000000; 
+}
+
+.campo .MuiInputLabel-root.Mui-focused {
+    color: #000000; 
+}
+
+.imagem-preview {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    max-width: 100%; 
+    object-fit: cover;
+}
+
+.botao-cadastrar {
+    background-color: #1976d2; 
+    color: #fff; 
+    transition: background-color 0.3s ease;
+}
+
+.botao-cadastrar:hover {
+    background-color: #115293; 
+}

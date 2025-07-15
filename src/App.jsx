@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import EditarProduto from "./pages/Edit";
 import Home from "./pages/Home";
+import Register from "./pages/Register"
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Routes>
           <Route path="/" element={<GradProducts />} />
           <Route path="/editar/:id" element={<EditarProduto />} />
+          <Route path="/cadastrar" element={<Register />} />
         </Routes>
       </Container>
     </BrowserRouter>
