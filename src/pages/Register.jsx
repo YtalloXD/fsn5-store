@@ -6,17 +6,20 @@ import {
   Typography,
   Box,
   Alert,
+  Switch,
+  FormControlLabel,
 } from "@mui/material";
 import axios from "axios";
 
 const API_URL = "https://6862fe1b88359a373e93ab43.mockapi.io/Produtos";
 
 export default function Register() {
-  const [nome, setNome] = useState("");
-  const [preco, setPreco] = useState("");
-  const [categoria, setCategoria] = useState("");
-  const [descricao, setDescricao] = useState("");
-  const [imagem, setImagem] = useState("");
+  const [Name, setName] = useState("");
+  const [Price, setPrice] = useState("");
+  const [Categoria, setCategoria] = useState("");
+  const [Estoque, setEstoque] = useState("");
+  const [Image, setImage] = useState("");
+  const [Disponivel, setDisponivel] = useState(true);
   const [sucesso, setSucesso] = useState(false);
   const [erro, setErro] = useState("");
 
@@ -25,62 +28,44 @@ export default function Register() {
     setSucesso(false);
     setErro("");
 
-    if (!nome || !preco || !categoria || !descricao) {
-      setErro("Preencha todos os campos obrigatórios.");
+    if (!Name || !Price || !Categoria) {
+      setErro("Preencha os campos obrigatórios.");
       return;
     }
 
-    if (parseFloat(preco) <= 0) {
+    if (parseFloat(Price) <= 0) {
       setErro("O preço deve ser maior que zero.");
       return;
     }
 
     try {
       await axios.post(API_URL, {
-        nome,
-        preco,
-        categoria,
-        descricao,
-        imagem,
+        Name,
+        Price: parseFloat(Price),
+        Categoria,
+        Estoque: parseInt(Estoque) || 0,
+        Disponivel,
+        Image,
       });
       setSucesso(true);
-      setNome("");
-      setPreco("");
+      setName("");
+      setPrice("");
       setCategoria("");
-      setDescricao("");
-      setImagem("");
+      setEstoque("");
+      setImage("");
+      setDisponivel(true);
     } catch (err) {
       setErro("Erro ao cadastrar produto.");
     }
   };
 
-  const inputStyles = {
-    backgroundColor: "#222",
-    borderRadius: 1,
-    color: "#fff",
-  };
-
-  const labelStyles = {
-    color: "#fff",
-  };
-
   return (
-    <Container
-      sx={{ mt: 4, bgcolor: "#000", color: "#fff", borderRadius: 2, p: 3 }}
-    >
+    <Container sx={{ mt: 4, bgcolor: "#000", color: "#fff", borderRadius: 2, p: 3 }}>
       <Typography variant="h4" gutterBottom textAlign="center" color="#fff">
         Cadastrar Produto
       </Typography>
-      {sucesso && (
-        <Alert severity="success" sx={{ mb: 2 }}>
-          Produto cadastrado com sucesso!
-        </Alert>
-      )}
-      {erro && (
-        <Alert severity="error" sx={{ mb: 2 }}>
-          {erro}
-        </Alert>
-      )}
+      {sucesso && <Alert severity="success">Produto cadastrado com sucesso!</Alert>}
+      {erro && <Alert severity="error">{erro}</Alert>}
       <Box
         component="form"
         onSubmit={handleSubmit}
@@ -88,50 +73,58 @@ export default function Register() {
       >
         <TextField
           label="Nome do Produto"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
+          value={Name}
+          onChange={(e) => setName(e.target.value)}
           required
-          InputLabelProps={{ style: labelStyles }}
-          InputProps={{ style: inputStyles }}
+          InputLabelProps={{ style: { color: "#fff" } }}
+          InputProps={{ style: { backgroundColor: "#222", color: "#fff" } }}
         />
         <TextField
           label="Preço"
           type="number"
-          value={preco}
-          onChange={(e) => setPreco(e.target.value)}
+          value={Price}
+          onChange={(e) => setPrice(e.target.value)}
           required
-          InputLabelProps={{ style: labelStyles }}
-          InputProps={{ style: inputStyles }}
-          inputProps={{ min: "0", step: "0.01" }}
+          InputLabelProps={{ style: { color: "#fff" } }}
+          InputProps={{ style: { backgroundColor: "#222", color: "#fff" } }}
         />
         <TextField
           label="Categoria"
-          value={categoria}
+          value={Categoria}
           onChange={(e) => setCategoria(e.target.value)}
           required
-          InputLabelProps={{ style: labelStyles }}
-          InputProps={{ style: inputStyles }}
+          InputLabelProps={{ style: { color: "#fff" } }}
+          InputProps={{ style: { backgroundColor: "#222", color: "#fff" } }}
         />
         <TextField
-          label="Descrição"
-          value={descricao}
-          onChange={(e) => setDescricao(e.target.value)}
-          required
-          multiline
-          InputLabelProps={{ style: labelStyles }}
-          InputProps={{ style: inputStyles }}
-          rows={4}
+          label="Estoque"
+          type="number"
+          value={Estoque}
+          onChange={(e) => setEstoque(e.target.value)}
+          InputLabelProps={{ style: { color: "#fff" } }}
+          InputProps={{ style: { backgroundColor: "#222", color: "#fff" } }}
+        />
+        <FormControlLabel
+          control={
+            <Switch
+              checked={Disponivel}
+              onChange={() => setDisponivel(!Disponivel)}
+              sx={{ color: "#fff" }}
+            />
+          }
+          label="Disponível para venda"
+          sx={{ color: "#fff" }}
         />
         <TextField
-          label="URL da Imagem (opcional)"
-          value={imagem}
-          onChange={(e) => setImagem(e.target.value)}
-          InputLabelProps={{ style: labelStyles }}
-          InputProps={{ style: inputStyles }}
+          label="URL da Imagem"
+          value={Image}
+          onChange={(e) => setImage(e.target.value)}
+          InputLabelProps={{ style: { color: "#fff" } }}
+          InputProps={{ style: { backgroundColor: "#222", color: "#fff" } }}
         />
-        {imagem && (
+        {Image && (
           <img
-            src={imagem}
+            src={Image}
             alt="Preview"
             width={200}
             style={{
