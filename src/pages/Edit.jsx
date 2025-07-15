@@ -5,6 +5,8 @@ import {
   Button,
   Box,
   CircularProgress,
+  FormControlLabel,
+  Switch,
 } from '@mui/material';
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -26,7 +28,11 @@ export default function EditarProduto() {
           return res.json();
         })
         .then((data) => {
-          setProduto(data);
+          const produtoComDisponivel = {
+            ...data,
+            Disponivel: data.Disponivel !== undefined ? data.Disponivel : true
+          };
+          setProduto(produtoComDisponivel);
           setLoading(false);
         })
         .catch(() => {
@@ -37,16 +43,28 @@ export default function EditarProduto() {
   }, [id]);
 
   const handleChange = (e) => {
-    setProduto({ ...produto, [e.target.name]: e.target.value });
+    const { name, value, type, checked } = e.target;
+    setProduto({ 
+      ...produto, 
+      [name]: type === 'checkbox' ? checked : value 
+    });
   };
 
   const handleSalvar = (e) => {
     e.preventDefault();
     setSalvando(true);
+
+    const produtoParaEnviar = {
+      ...produto,
+      Price: parseFloat(produto.Price),
+      Estoque: parseInt(produto.Estoque),
+      Disponivel: Boolean(produto.Disponivel)
+    };
+
     fetch(`https://6862fe1b88359a373e93ab43.mockapi.io/Produtos/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(produto),
+      body: JSON.stringify(produtoParaEnviar),
     })
       .then((res) => {
         if (!res.ok) throw new Error("Erro ao salvar produto");
@@ -86,6 +104,7 @@ export default function EditarProduto() {
   return (
     <Container maxWidth="sm" sx={{ mt: 4 }}>
       <Typography variant="h5" gutterBottom>Editar Produto</Typography>
+      
       <form onSubmit={handleSalvar}>
         <TextField
           label="Nome"
@@ -95,6 +114,7 @@ export default function EditarProduto() {
           fullWidth
           margin="normal"
         />
+
         <TextField
           label="Imagem"
           name="Image"
@@ -103,6 +123,27 @@ export default function EditarProduto() {
           fullWidth
           margin="normal"
         />
+
+        <TextField
+          label="Descrição"
+          name="Descricao"
+          type="string"
+          value={produto.Descricao || ""}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+        />
+
+        <TextField
+          label="Categoria"
+          name="Categoria"
+          value={produto.Categoria || ""}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+          placeholder="Ex: Camisas, Calças, Jaquetas, Sapatos"
+        />
+
         <TextField
           label="Preço"
           name="Price"
@@ -111,7 +152,9 @@ export default function EditarProduto() {
           onChange={handleChange}
           fullWidth
           margin="normal"
+          inputProps={{ min: "0", step: "0.01" }}
         />
+
         <TextField
           label="Estoque"
           name="Estoque"
@@ -120,7 +163,31 @@ export default function EditarProduto() {
           onChange={handleChange}
           fullWidth
           margin="normal"
+          inputProps={{ min: "0", step: "1" }}
         />
+
+        <FormControlLabel
+          control={
+            <Switch
+              checked={produto.Disponivel || false}
+              onChange={handleChange}
+              name="Disponivel"
+              color="primary"
+            />
+          }
+          label="Produto disponível para venda"
+          sx={{ mt: 2, mb: 2 }}
+        />
+
+        {produto.Image && (
+          <Box sx={{ mt: 2, mb: 2, textAlign: 'center' }}>
+            <img 
+              src={produto.Image} 
+              alt="Preview" 
+              style={{ maxWidth: '200px', borderRadius: '8px' }}
+            />
+          </Box>
+        )}
 
         <Button
           type="submit"

@@ -6,6 +6,8 @@ import {
   Typography,
   Box,
   Alert,
+  FormControlLabel,
+  Switch,
 } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -19,17 +21,19 @@ export default function Register() {
     Price: "",
     Estoque: "",
     Image: "",
+    Descricao: "",
+    Disponivel: true, 
+    Categoria: "", 
   });
   const [sucesso, setSucesso] = useState(false);
   const [erro, setErro] = useState("");
-
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setProduto(prev => ({
       ...prev,
-      [name]: value
+      [name]: type === 'checkbox' ? checked : value
     }));
   };
 
@@ -54,6 +58,9 @@ export default function Register() {
         Price: parseFloat(produto.Price),
         Estoque: parseInt(produto.Estoque),
         Image: produto.Image,
+        Descricao: produto.Descricao,
+        Disponivel: produto.Disponivel, 
+        Categoria: produto.Categoria || "Geral", 
       });
 
       setSucesso(true);
@@ -62,6 +69,9 @@ export default function Register() {
         Price: "",
         Estoque: "",
         Image: "",
+        Descricao: "",
+        Disponivel: true,
+        Categoria: "",
       });
 
       setTimeout(() => {
@@ -93,6 +103,7 @@ export default function Register() {
           Produto cadastrado com sucesso!
         </Alert>
       )}
+
       {erro && (
         <Alert severity="error" className="alert">
           {erro}
@@ -109,6 +120,7 @@ export default function Register() {
           className="campo"
           InputLabelProps={{ className: "label" }}
         />
+
         <TextField
           label="Imagem"
           name="Image"
@@ -117,6 +129,26 @@ export default function Register() {
           className="campo"
           InputLabelProps={{ className: "label" }}
         />
+
+        <TextField
+          label="Descrição"
+          name="Descricao"
+          value={produto.Descricao}
+          onChange={handleChange}
+          className="campo"
+          InputLabelProps={{ className: "label" }}
+        />
+
+        <TextField
+          label="Categoria"
+          name="Categoria"
+          value={produto.Categoria}
+          onChange={handleChange}
+          className="campo"
+          InputLabelProps={{ className: "label" }}
+          placeholder="Ex: Camisas, Calças, Jaquetas, Sapatos"
+        />
+
         <TextField
           label="Preço"
           name="Price"
@@ -128,6 +160,7 @@ export default function Register() {
           inputProps={{ min: "0", step: "0.01" }}
           InputLabelProps={{ className: "label" }}
         />
+
         <TextField
           label="Estoque"
           name="Estoque"
@@ -139,9 +172,24 @@ export default function Register() {
           inputProps={{ min: "0", step: "1" }}
           InputLabelProps={{ className: "label" }}
         />
+
+        <FormControlLabel
+          control={
+            <Switch
+              checked={produto.Disponivel}
+              onChange={handleChange}
+              name="Disponivel"
+              color="primary"
+            />
+          }
+          label="Produto disponível para venda"
+          className="campo"
+        />
+
         {produto.Image && (
           <img src={produto.Image} alt="Preview" className="imagem-preview" />
         )}
+
         <Button type="submit" variant="contained" className="botao-cadastrar">
           Cadastrar
         </Button>

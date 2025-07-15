@@ -193,6 +193,14 @@ export default function GradProducts() {
                   <Typography variant="subtitle1" color="secondary">
                     R$ {product.Price ? Number(product.Price).toFixed(2) : "0,00"}
                   </Typography>
+                  
+                   <Typography className="product_Descricao" variant="h6" gutterBottom>
+                    {product.Descricao ? product.Descricao.trim() : 'Descrição não informada'}
+                  </Typography>
+
+                   <Typography variant="body2" color={product.Disponivel ? "green" : "red"}>
+                  {product.Disponivel ? "Disponível para venda" : "Indisponível"}
+                </Typography>
                 </CardContent>
                 
                 <Box
