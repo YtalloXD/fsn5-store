@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./Register.css";
 
 const API_URL = "https://6862fe1b88359a373e93ab43.mockapi.io/Produtos";
 
@@ -44,13 +45,13 @@ export default function Register() {
 
     try {
       await axios.post(API_URL, {
-        Name: Name,
-        Price: parseFloat(price),
-        Categoria: categoria,
-        Descricao: descricao,
-        Estoque: parseInt(estoque),
-        Disponivel: disponivel,
-        Image: Image,
+        Name,
+        Price: parseFloat(Price),
+        Categoria,
+        Descricao,
+        Estoque: parseInt(Estoque),
+        Disponivel,
+        Image,
       });
 
       setSucesso(true);
@@ -71,133 +72,101 @@ export default function Register() {
   };
 
   useEffect(() => {
-    if (sucesso || erro) {
+    if (Sucesso || Erro) {
       const timer = setTimeout(() => {
         setSucesso(false);
         setErro("");
       }, 3000);
       return () => clearTimeout(timer);
     }
-  }, [sucesso, erro]);
-
-  const inputStyles = {
-    backgroundColor: "#222",
-    borderRadius: 1,
-    color: "#fff",
-  };
-
-  const labelStyles = {
-    color: "#fff",
-  };
+  }, [Sucesso, Erro]);
 
   return (
-    <Container sx={{ mt: 4, bgcolor: "#000", color: "#fff", borderRadius: 2, p: 3 }}>
-      <Typography variant="h4" gutterBottom textAlign="center" color="#fff">
+    <Container className="container-register">
+      <Typography variant="h4" gutterBottom textAlign="center" className="titulo">
         Cadastrar Produto
       </Typography>
 
-      {sucesso && (
-        <Alert severity="success" sx={{ mb: 2 }}>
+      {Sucesso && (
+        <Alert severity="success" className="alert">
           Produto cadastrado com sucesso!
         </Alert>
       )}
-      {erro && (
-        <Alert severity="error" sx={{ mb: 2 }}>
-          {erro}
+      {Erro && (
+        <Alert severity="error" className="alert">
+          {Erro}
         </Alert>
       )}
 
-      <Box
-        component="form"
-        onSubmit={handleSubmit}
-        sx={{ display: "flex", flexDirection: "column", gap: 2 }}
-      >
+      <Box component="form" onSubmit={handleSubmit} className="formulario">
         <TextField
           label="Nome do Produto"
           value={Name}
           onChange={(e) => setName(e.target.value)}
           required
-          InputLabelProps={{ style: labelStyles }}
-          InputProps={{ style: inputStyles }}
+          className="campo"
+          InputLabelProps={{ className: "label" }}
         />
         <TextField
           label="Preço"
           type="number"
-          value={price}
+          value={Price}
           onChange={(e) => setPrice(e.target.value)}
           required
+          className="campo"
           inputProps={{ min: "0", step: "0.01" }}
-          InputLabelProps={{ style: labelStyles }}
-          InputProps={{ style: inputStyles }}
+          InputLabelProps={{ className: "label" }}
         />
         <TextField
           label="Categoria"
-          value={categoria}
+          value={Categoria}
           onChange={(e) => setCategoria(e.target.value)}
           required
-          InputLabelProps={{ style: labelStyles }}
-          InputProps={{ style: inputStyles }}
+          className="campo"
+          InputLabelProps={{ className: "label" }}
         />
         <TextField
           label="Descrição"
-          value={descricao}
+          value={Descricao}
           onChange={(e) => setDescricao(e.target.value)}
           required
           multiline
           rows={4}
-          InputLabelProps={{ style: labelStyles }}
-          InputProps={{ style: inputStyles }}
+          className="campo"
+          InputLabelProps={{ className: "label" }}
         />
         <TextField
           label="Quantidade em Estoque"
           type="number"
-          value={estoque}
+          value={Estoque}
           onChange={(e) => setEstoque(e.target.value)}
           required
+          className="campo"
           inputProps={{ min: "0", step: "1" }}
-          InputLabelProps={{ style: labelStyles }}
-          InputProps={{ style: inputStyles }}
+          InputLabelProps={{ className: "label" }}
         />
         <FormControlLabel
           control={
             <Checkbox
-              checked={disponivel}
+              checked={Disponivel}
               onChange={(e) => setDisponivel(e.target.checked)}
-              sx={{ color: "#fff" }}
+              className="checkbox"
             />
           }
           label="Disponível para venda"
-          sx={{ color: "#fff" }}
+          className="label"
         />
         <TextField
           label="URL da Imagem (opcional)"
           value={Image}
           onChange={(e) => setImage(e.target.value)}
-          InputLabelProps={{ style: labelStyles }}
-          InputProps={{ style: inputStyles }}
+          className="campo"
+          InputLabelProps={{ className: "label" }}
         />
         {Image && (
-          <img
-            src={Image}
-            alt="Preview"
-            width={200}
-            style={{
-              borderRadius: 8,
-              border: "1px solid #ccc",
-              marginTop: 10,
-            }}
-          />
+          <img src={Image} alt="Preview" className="imagem-preview" />
         )}
-        <Button
-          type="submit"
-          variant="contained"
-          sx={{
-            backgroundColor: "#fff",
-            color: "#000",
-            fontWeight: "bold",
-            "&:hover": { backgroundColor: "#ddd" },
-          }}
-        >
+        <Button type="submit" variant="contained" className="botao-cadastrar">
           Cadastrar
         </Button>
       </Box>
